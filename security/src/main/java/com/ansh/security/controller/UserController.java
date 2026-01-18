@@ -39,4 +39,18 @@ public class UserController {
 		return new ResponseEntity<String>(message, HttpStatus.ACCEPTED);
 
 	}
+
+	@PostMapping("/login")
+	public ResponseEntity<?> loginUser(@RequestBody User user) {
+		String message = "User [" + user.getUserName() + "] login successfully";
+		try {
+			message=service.verifyUser(user);
+		} catch (Exception e) {
+			message = "Error while logged in user [" + user.getUserName() + "]. " + e.getLocalizedMessage();
+			log.error("Error while logged in user [" + user.getUserName() + "]", e.getLocalizedMessage(), e);
+			return new ResponseEntity<String>(message, HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<String>(message, HttpStatus.ACCEPTED);
+
+	}
 }
