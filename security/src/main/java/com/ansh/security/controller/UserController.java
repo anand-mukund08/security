@@ -42,7 +42,7 @@ public class UserController {
 
 	@PostMapping("/login")
 	public ResponseEntity<?> loginUser(@RequestBody User user) {
-		String message = "User [" + user.getUserName() + "] login successfully";
+		String message = "User [" + user.getUserName() + "] logged in successfully";
 		try {
 			message=service.verifyUser(user);
 		} catch (Exception e) {
@@ -54,3 +54,4 @@ public class UserController {
 
 	}
 }
+
